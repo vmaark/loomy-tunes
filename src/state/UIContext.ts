@@ -11,6 +11,7 @@ export const UIContext = createContext<UIState>({
   erc721s: [],
   erc1155s: [],
   selectedToken: undefined,
+  selectedAddress: undefined,
 });
 
 export const UIDispatchContext = createContext<Dispatch<DashboardAction>>(
