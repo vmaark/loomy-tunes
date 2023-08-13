@@ -60,7 +60,7 @@ export const SendPanel: FC = () => {
   );
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: "0xecb504d39723b0be0e3a9aa33d646642d1051ee1",
+    address: state.selectedToken,
     abi: erc20ABI,
     functionName: "transfer",
     args: [state.selectedAddress!, parseEther(sendTokenAmount)],
@@ -117,9 +117,10 @@ export const SendPanel: FC = () => {
         disabled={
           validationMessage != null ||
           isZero(sendTokenAmount, decimals) ||
-          isLoading
+          isLoading ||
+          !write
         }
-        onClick={() => write()}
+        onClick={() => write?.()}
       >
         Send
       </Button>
