@@ -1,8 +1,8 @@
-import { ReactNode, useReducer } from 'react';
+import { ReactNode, useReducer } from "react";
 
-import { uiReducer } from '@/state/dashboardReducer';
+import { uiReducer } from "@/state/dashboardReducer";
 
-import { UIContext, UIDispatchContext } from './UIContext';
+import { UIContext, UIDispatchContext } from "./UIContext";
 
 export function UIProvider({
   children,
@@ -11,10 +11,11 @@ export function UIProvider({
 }) {
   const [state, dispatch] = useReducer(uiReducer, {
     addresses: {},
+    erc20s: [],
     erc721s: [],
     erc1155s: [],
-    erc20s: [],
-    panelsState: {},
+    selectedToken: undefined,
+    selectedAddress: undefined,
   });
 
   return (
