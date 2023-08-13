@@ -22,6 +22,7 @@ type IconLinkProps = {
   iconClassName?: string;
 } & Omit<UnstyledLinkProps, 'children'>;
 
+// eslint-disable-next-line react/display-name
 const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
   (
     {

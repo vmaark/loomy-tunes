@@ -20,6 +20,7 @@ type IconButtonProps = {
   iconClassName?: string;
 } & React.ComponentPropsWithRef<'button'>;
 
+// eslint-disable-next-line react/display-name
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
