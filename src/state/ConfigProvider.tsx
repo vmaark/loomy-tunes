@@ -1,6 +1,7 @@
+"use client";
+
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AppProps } from "next/app";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import {
   arbitrum,
@@ -12,13 +13,10 @@ import {
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
-import "@rainbow-me/rainbowkit/styles.css";
-import "@/styles/globals.css";
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
-import "@/styles/colors.css";
 import { ThemeProvider } from "@material-tailwind/react";
 
 import { UIProvider } from "@/state/UIProvider";
+import { FC, PropsWithChildren } from "react";
 
 const { chains, publicClient } = configureChains(
   [mainnet, polygon, optimism, arbitrum, localhost, arbitrumGoerli],
@@ -26,8 +24,9 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
+  appName: "Loomy Tunes",
   chains,
+  projectId: "loomy-tunes",
 });
 
 const config = createConfig({
@@ -43,20 +42,17 @@ const queryClient = new QueryClient({
     },
   },
 });
-function MyApp({ Component, pageProps }: AppProps) {
+
+export const ConfigProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <WagmiConfig config={config}>
           <RainbowKitProvider chains={chains}>
-            <UIProvider>
-              <Component {...pageProps} />
-            </UIProvider>
+            <UIProvider>{children}</UIProvider>
           </RainbowKitProvider>
         </WagmiConfig>
       </QueryClientProvider>
     </ThemeProvider>
   );
-}
-
-export default MyApp;
+};
